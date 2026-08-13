@@ -29,4 +29,11 @@ public class BancoDeDadosEmMemoriaAdapter implements BancoDeDadosPort {
         db.put(uuidGerado, response);
         return response;
     }
+
+    @Override
+    public void deleteAll() {
+
+        LoggerUtils.info(log, "Apagando transacoes do banco de dados", "transacoes", db);
+        db.clear();
+    }
 }

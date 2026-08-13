@@ -1,7 +1,10 @@
 package com.arthur_souto.desafio_itau.config;
 
+import com.arthur_souto.desafio_itau.application.adapter.ApagaTransacoesNaMemoriaAdapter;
 import com.arthur_souto.desafio_itau.application.adapter.SalvaTransacaoNaMemoriaAdapter;
+import com.arthur_souto.desafio_itau.application.port.ApagaTransacoesNaMemoriaPort;
 import com.arthur_souto.desafio_itau.application.port.SalvaTransacaoNaMemoriaPort;
+import com.arthur_souto.desafio_itau.application.usecase.ApagarTransacoesNaMemoriaUseCase;
 import com.arthur_souto.desafio_itau.application.usecase.SalvarTransacaoNaMemoriaUseCase;
 import com.arthur_souto.desafio_itau.infra.adapter.BancoDeDadosEmMemoriaAdapter;
 import com.arthur_souto.desafio_itau.infra.port.BancoDeDadosPort;
@@ -22,7 +25,17 @@ public class GlobalRegisterUseCase {
     }
 
     @Bean
+    public ApagaTransacoesNaMemoriaPort apagaTransacoesNaMemoriaPort(BancoDeDadosPort bancoDeDadosPort) {
+        return new ApagaTransacoesNaMemoriaAdapter(bancoDeDadosPort);
+    }
+
+    @Bean
     public SalvarTransacaoNaMemoriaUseCase salvarTransacaoNaMemoriaUseCase(SalvaTransacaoNaMemoriaPort port) {
         return new SalvarTransacaoNaMemoriaUseCase(port);
+    }
+
+    @Bean
+    public ApagarTransacoesNaMemoriaUseCase apagarTransacoesNaMemoriaUseCase(ApagaTransacoesNaMemoriaPort port) {
+        return new ApagarTransacoesNaMemoriaUseCase(port);
     }
 }
