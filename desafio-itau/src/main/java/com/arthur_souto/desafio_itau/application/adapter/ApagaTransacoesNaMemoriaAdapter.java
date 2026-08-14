@@ -13,6 +13,6 @@ public class ApagaTransacoesNaMemoriaAdapter implements ApagaTransacoesNaMemoria
 
     @Override
     public void apagarTransacoesNaMemoria() {
-        this.bancoDeDadosPort.deleteAll();
+        this.bancoDeDadosPort.deleteAll("TRANSACAO_TABLE");
     }
 }

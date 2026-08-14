@@ -3,9 +3,7 @@ package com.arthur_souto.desafio_itau.application.adapter;
 import com.arthur_souto.desafio_itau.application.port.RetornaMetricasTransacoesPort;
 import com.arthur_souto.desafio_itau.domain.MetricasTransacoesResponseDomain;
 import com.arthur_souto.desafio_itau.domain.TransacaoDomain;
-import com.arthur_souto.desafio_itau.infra.entidade.BancoDeDadosEntidadeResponse;
 import com.arthur_souto.desafio_itau.infra.port.BancoDeDadosPort;
-import com.arthur_souto.desafio_itau.utils.LoggerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +26,7 @@ public class RetornaMetricasTransacoesAdapter implements RetornaMetricasTransaco
     @Override
     public MetricasTransacoesResponseDomain retornarMetricas() {
 
-        var ultimoMinuto =  bancoDeDadosPort.findAll().stream()
+        var ultimoMinuto =  bancoDeDadosPort.findAll("TRANSACAO_TABLE").stream()
                 .map(gp -> (TransacaoDomain) gp.getObject())
                 .filter(domain -> domain.getDataHora().isAfter(OffsetDateTime.now().minusSeconds(TETO_METRICAS_SEGUNDOS)))
                 .map(TransacaoDomain::getValor)

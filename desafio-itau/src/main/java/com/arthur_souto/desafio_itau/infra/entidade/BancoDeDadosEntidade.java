@@ -2,14 +2,24 @@ package com.arthur_souto.desafio_itau.infra.entidade;
 
 import java.util.UUID;
 
-public class BancoDeDadosEntidadeResponse<T> {
+public class BancoDeDadosEntidade<T> {
 
     UUID id;
+    String tableName;
     T object;
 
-    public BancoDeDadosEntidadeResponse(T object, UUID id) {
-        this.object = object;
+    public BancoDeDadosEntidade(UUID id, T object, String tableName) {
         this.id = id;
+        this.object = object;
+        this.tableName = tableName;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
     public UUID getId() {
